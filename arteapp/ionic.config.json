@@ -1,0 +1,7 @@
+{
+  "name": "arteapp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
