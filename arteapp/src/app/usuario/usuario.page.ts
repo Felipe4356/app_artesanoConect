@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AnimationController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-usuario',
@@ -6,8 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./usuario.page.scss'],
 })
 export class UsuarioPage implements OnInit {
+  
 
-  constructor() { }
+  constructor(private animationCtrl: AnimationController, ) {
+    
+   }
+
+   
 
   ngOnInit() {
   }
