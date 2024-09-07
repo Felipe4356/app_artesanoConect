@@ -32,6 +32,10 @@ const routes: Routes = [
     loadChildren: () => import('./mapa/mapa.module').then( m => m.MapaPageModule),
     data: { animation: 'slideInLeft' }
   },
+  {
+    path: 'editor-user',
+    loadChildren: () => import('./editor-user/editor-user.module').then( m => m.EditorUserPageModule)
+  },
 
   
   

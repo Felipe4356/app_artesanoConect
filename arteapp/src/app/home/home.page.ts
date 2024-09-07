@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../login/AuthService';
+import { AuthService } from '../AuthService';
 
 
 
@@ -12,11 +12,16 @@ import { AuthService } from '../login/AuthService';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  nombreUsuario: string = '';
+  
+
+  user: any;
 
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
-    this.nombreUsuario = this.authService.getNombreUsuario();
+    
   }
+
+
+  
 }

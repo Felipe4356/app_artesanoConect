@@ -1,0 +1,52 @@
+// editor-user.page.scss
+
+ion-header {
+  background-color: #f4f4f4;
+}
+
+ion-toolbar {
+  --background: #e3e3e3;
+}
+
+ion-title {
+  color: #333;
+}
+
+ion-item {
+  margin-bottom: 16px;
+}
+
+ion-label {
+  font-weight: bold;
+}
+
+ion-input, ion-textarea {
+  padding: 10px;
+  border-radius: 5px;
+}
+
+ion-button {
+  --border-radius: 5px;
+  --padding-start: 16px;
+  --padding-end: 16px;
+}
+
+.profile-image {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.product-image {
+  width: 100%;
+  border-radius: 5px;
+}
+
+ion-grid {
+  margin-top: 20px;
+}
+
+ion-button[color="primary"] {
+  background-color: #4CAF50; /* Color verde para el botón de guardar */
+}

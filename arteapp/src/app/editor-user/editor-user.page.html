@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title style="color: white;">Regresar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="saveUser()">
+    <ion-item>
+      <ion-label position="floating">Name</ion-label>
+      <ion-input [(ngModel)]="user.name" name="name" required></ion-input>
+    </ion-item>
+   
+    <ion-item>
+      <ion-label position="floating">direccion</ion-label>
+      <ion-input [(ngModel)]="user.direccion" name="direccion" required></ion-input>
+    </ion-item>
+      
+    
+
+    <ion-item>
+      <ion-label position="floating">Biografia</ion-label>
+      <ion-textarea [(ngModel)]="user.bio" name="bio"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Instagram</ion-label>
+      <ion-input [(ngModel)]="user.socialLinks.instagram" name="instagram" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Facebook</ion-label>
+      <ion-input [(ngModel)]="user.socialLinks.facebook" name="facebook" type="text"></ion-input>
+    </ion-item>
+    
+
+    
+    <ion-item>
+      <ion-label>agregar Imagen</ion-label>
+      <ion-button expand="full" (click)="changeProfileImage()">agregar Imagen</ion-button>
+    </ion-item>
+
+    <ion-item>
+      <img [src]="user.profileImage" alt="Profile Image" class="profile-image">
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Producto Imagen</ion-label>
+      <ion-button expand="full" (click)="addProductImage()">agregar imagen de producto</ion-button>
+    </ion-item>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="4" *ngFor="let img of user.productImages; let i = index">
+          <ion-img [src]="img" class="product-image"></ion-img>
+          <ion-button color="danger" expand="full" (click)="removeProductImage(i)">Remover</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-button expand="full" type="submit" color="primary">guardar</ion-button>
+  </form>
+</ion-content>
