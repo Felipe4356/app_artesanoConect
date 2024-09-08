@@ -19,7 +19,7 @@
    <br><br><br>
    <ion-card>
     <ion-card-header>
-      <ion-card-title>Login</ion-card-title>
+      <ion-card-title>Inicie sesión</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       
@@ -28,11 +28,11 @@
         <ion-input  type="text" [(ngModel)]="persona.nombre"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Password</ion-label>
+        <ion-label position="floating">Contraseña</ion-label>
         <ion-input type="password" [(ngModel)]="persona.Password"></ion-input>
       </ion-item>
       <ion-button expand="full" color="primary" (click)="login()">Login</ion-button>
-      <p> ¿todavia no tienes una cuenta?<span [routerLink]="['/register']" style="color: blue;">crea una</span></p>
+      <p> ¿no tienes una cuenta?<span [routerLink]="['/register']" style="color: blue;">crea una</span></p>
 
            
     </ion-card-content>
