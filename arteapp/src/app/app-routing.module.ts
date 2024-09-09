@@ -19,11 +19,7 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
-  {
-    path: 'register',
-    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
-  },
-
+  
   { path: 'usuario',
     loadChildren: () => import('./usuario/usuario.module').then( m => m.UsuarioPageModule),
     data: { animation: 'slideInLeft' }

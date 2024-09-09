@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="secondary">
-    <ion-title>ArtesanoConect</ion-title>
+    <ion-title>ArtesanoConect &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<ion-icon name="exit-outline"></ion-icon><span  [routerLink]="['/login']"> Log out</span> </ion-title>  
   </ion-toolbar>
 </ion-header>
 
@@ -11,18 +11,26 @@
       <img [src]="user.profileImage" alt="Profile Image">
     </div>
     <div class="profile-info">
-      <h2>{{ user.name }}</h2>
+      <h2>{{ user.name }}</h2> 
       <ion-button expand="block" [routerLink]="['/editor-user']">Editar Perfil</ion-button>
     </div>
   </div>
 
   <ion-grid>
     <div *ngIf="user.socialLinks.facebook">
-      <p>Facebook: <a [href]="user.socialLinks.facebook" target="_blank">Facebook</a></p>
+      <p>Redes sociales:<br>-<a [href]="user.socialLinks.facebook" target="_blank">Facebook</a></p>
     </div>
     <div *ngIf="user.socialLinks.instagram">
-      <p>Instagram: <a [href]="user.socialLinks.instagram" target="_blank" style="color: rgb(192, 54, 12);">Instagram</a></p>
+      <p>- <a [href]="user.socialLinks.instagram" target="_blank" style="color: rgb(192, 54, 12);">Instagram</a></p>
     </div>
+
+    <div *ngIf="user.socialLinks.whatsapp">
+      <p>- <a [href]="'https://wa.me/' + user.socialLinks.whatsapp" target="_blank" style="color: rgb(37, 211, 102);">Whatsapp</a></p>
+    </div>
+
+    
+
+    
     <div *ngIf="user.bio">
       <p>direccion: {{user.direccion}}</p>
       <p>Biografía: {{ user.bio }}</p>

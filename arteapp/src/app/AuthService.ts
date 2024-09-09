@@ -15,6 +15,8 @@ export class AuthService {
         facebook: '',
       
         instagram: '',
+
+        whatsapp: '',
         
       }
   };

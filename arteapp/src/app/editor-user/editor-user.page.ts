@@ -17,6 +17,7 @@ export class EditorUserPage implements OnInit {
     socialLinks: {
       facebook: '',
       instagram: '',
+      whatsapp: '',
     }
   };
 
