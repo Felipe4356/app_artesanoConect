@@ -33,11 +33,6 @@ const routes: Routes = [
     loadChildren: () => import('./editor-user/editor-user.module').then( m => m.EditorUserPageModule)
   },
 
-  
-  
-
-  
- 
 ];
 
 @NgModule({
