@@ -1,8 +1,15 @@
 <ion-header>
   <ion-toolbar color="secondary">
-    <ion-title>ArtesanoConect &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<ion-icon name="exit-outline"></ion-icon><span [routerLink]="['/login']"> Log out</span></ion-title>  
+    <ion-title style="text-align: center;">
+      ArtesanoConect
+    </ion-title>
+    <ion-buttons slot="end"> 
+      <ion-icon name="exit-outline"></ion-icon>
+      <span [routerLink]="['/login']" style="cursor: pointer;">Log out</span>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
+
 <!-- hay que colocar el logout pegado a la derecha-->
 
 <ion-content *ngIf="user" class="profile-content" color="light">
@@ -13,28 +20,40 @@
     </div>
     <div class="profile-info">
       <h2>{{ user.name }}</h2> 
-      <ion-button expand="block" [routerLink]="['/editor-user']">Editar Perfil</ion-button>
+      
+      
+      <ion-button class="btn_edit" size="default" expand="block" [routerLink]="['/editor-user']">Editar Perfil</ion-button>
     </div>
   </div>
 
   <ion-grid>
-    <div *ngIf="user.socialLinks.facebook">
-      <p>Redes sociales:<br>-<a [href]="user.socialLinks.facebook" target="_blank">Facebook</a></p>
-    </div>
-    <div *ngIf="user.socialLinks.instagram">
-      <p>- <a [href]="user.socialLinks.instagram" target="_blank" style="color: rgb(192, 54, 12);">Instagram</a></p>
-    </div>
-
-    <div *ngIf="user.socialLinks.whatsapp">
-      <p>- <a [href]="'https://wa.me/' + user.socialLinks.whatsapp" target="_blank" style="color: rgb(37, 211, 102);">Whatsapp</a></p>
-    </div>
-
+   
+     
+      <div style="display: inline-flex; gap: 15px; justify-content: center;">
+        <div *ngIf="user.socialLinks.facebook">
+          <a [href]="user.socialLinks.facebook" target="_blank" style="text-decoration: none; color: black;">
+            Facebook <ion-icon style="color: blue;" name="logo-facebook"></ion-icon>
+          </a>
+        </div>
+        
+        <div *ngIf="user.socialLinks.instagram">
+          <a [href]="user.socialLinks.instagram" target="_blank" style="  text-decoration: none; color: black;">
+            Instagram <ion-icon style="color: rgb(192, 54, 12);" name="logo-instagram"></ion-icon>
+          </a>
+        </div>
+        
+        <div *ngIf="user.socialLinks.whatsapp">
+          <a [href]="'https://wa.me/' + user.socialLinks.whatsapp" target="_blank" style=" text-decoration: none; color: black;">
+            Whatsapp <ion-icon style="color: rgb(37, 211, 102);" name="logo-whatsapp"></ion-icon>
+          </a>
+        </div>
+      </div>
     
-
-    
+    <br>
+      
     <div *ngIf="user.bio">
-      <p>direccion: {{user.direccion}}</p>
-      <p>Biografía: {{ user.bio }}</p>
+    
+      <p>Biografía: <br> {{ user.bio }}</p>
     </div>
     <h3>Artesanias:</h3>
     <ion-row class="product-images">
@@ -64,3 +83,4 @@
     <ion-label>Map</ion-label>
   </ion-tab-button>
 </ion-tab-bar>
+

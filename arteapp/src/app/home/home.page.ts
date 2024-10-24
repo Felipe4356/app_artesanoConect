@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../AuthService';
-
+import { localStorageService } from '../services/storagesql.service';
+import { Router } from '@angular/router';
 
 
 
@@ -13,15 +13,43 @@ import { AuthService } from '../AuthService';
 })
 export class HomePage {
   
+  users: any[] = [];
 
-  user: any;
+  filteredUsers: any[] = [];   // Lista filtrada para mostrar
+  searchTerm: string = '';     // Término de búsqueda
 
-  constructor(private authService: AuthService) {}
+  constructor(private local: localStorageService, private router: Router) {}
 
   ngOnInit() {
-    
+    this.loadUsers();  // Carga los usuarios al iniciar la página
   }
 
+  // Cargar todos los usuarios desde localStorage
+  loadUsers() {
+    this.users = this.local.getAllUsers();
+    this.filteredUsers = this.users;  // Inicialmente, mostrar todos los usuarios
+  }
 
-  
+  // Filtrar los usuarios según el término de búsqueda
+  filterUsers(event: any) {
+    const searchValue = event.target.value.toLowerCase();  // Obtener el valor del campo de búsqueda
+
+    // Si hay un término de búsqueda, filtrar usuarios
+    if (searchValue && searchValue.trim() !== '') {
+      this.filteredUsers = this.users.filter((user) => {
+        return (
+          user.name.toLowerCase().includes(searchValue) ||
+          user.email.toLowerCase().includes(searchValue)
+        );
+      });
+    } else {
+      // Si no hay búsqueda, mostrar todos los usuarios
+      this.filteredUsers = this.users;
+    }
+  }
+
+  // Ver perfil del usuario seleccionado
+  viewProfile(user: any) {
+    this.router.navigate(['/user-profile'], { state: { user } });
+  }
 }

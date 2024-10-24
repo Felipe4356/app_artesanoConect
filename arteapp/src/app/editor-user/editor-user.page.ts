@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../AuthService';
+import { localStorageService } from '../services/storagesql.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,28 +8,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./editor-user.page.scss'],
 })
 export class EditorUserPage implements OnInit {
-  user = {
-    name: '',
-    direccion: '',
-    bio: '',
-    profileImage: '',
-    productImages: [] as string[],  // Lista de imágenes de productos
-    socialLinks: {
-      facebook: '',
-      instagram: '',
-      whatsapp: '',
-    }
-  };
+  user: any = {};
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private local: localStorageService, private router: Router) {}
 
   ngOnInit() {
-    this.user = { ...this.authService.getUser() };  // Copia los datos del usuario actual
+    this.user = this.local.getUser();  // Cargar la información actual del usuario en sesión
   }
 
-  saveUser() {
-    this.authService.saveUser(this.user);
-    this.router.navigate(['/usuario']);  // Navega a la página de perfil después de guardar
+  saveProfile() {
+    this.local.saveUser(this.user);  // Actualizar el usuario existente
+    this.router.navigate(['/usuario']);  // Navegar de vuelta al perfil
   }
 
   changeProfileImage() {

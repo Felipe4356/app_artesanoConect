@@ -1,50 +1,34 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="secondary">
-    <ion-title>
-      ArtesanoConect
-      
-    </ion-title>
+    <ion-title>ArtesanoConect</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" color="light">
-  <ion-header collapse="condense">
-   
-    
-  </ion-header>
-  <ion-searchbar></ion-searchbar>
-<h3 style="text-align: center;">Locales</h3>
-  <div id="container">
-    <ion-card>
-      <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
-      <ion-card-header>
-        <ion-card-title> Eventos:</ion-card-title>
+<ion-content class="ion-padding">
+  <h3 style="text-align: center;">Locales:</h3>
 
+  <!-- Barra de búsqueda -->
+  <ion-searchbar 
+    [(ngModel)]="searchTerm" 
+    (ionInput)="filterUsers($event)" 
+    placeholder="Buscar usuarios...">
+  </ion-searchbar>
+
+  <ion-list>
+    <ion-card *ngFor="let user of filteredUsers">
+      <ion-card-header>
+        <img [src]="user.profileImage" alt="Profile Image">
+        <ion-card-title>{{ user.name }}</ion-card-title>
       </ion-card-header>
-    
-      <ion-card-content >
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis nesciunt ipsum maxime animi veniam deleniti velit unde ipsa ullam ad! Voluptatem explicabo aperiam incidunt, nihil aliquam sequi tenetur molestias dolorum! <br> <br>
-        <ion-button>Ver</ion-button>
+      <ion-card-content>
+        <p>Dirección: {{ user.direccion }}</p>
+        <p>Biografía: {{ user.bio }}</p>
+        <p>Email: {{ user.email }}</p>
+        <ion-button (click)="viewProfile(user)">Ver Perfil</ion-button>
       </ion-card-content>
     </ion-card>
-    
-    
-  </div>
-
-
-
-
-
-
-
-
-
-
-  
-    
-  
+  </ion-list>
 </ion-content>
-
 
 <ion-tab-bar slot="bottom">
   <ion-tab-button tab="home" [routerLink]="['/home']">
