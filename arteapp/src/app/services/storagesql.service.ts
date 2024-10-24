@@ -17,6 +17,7 @@ export class localStorageService {
       instagram: '',
       whatsapp: '',
     },
+    role: 'user',
   };
 
   private usersKey = 'users';  // Clave para almacenar los usuarios
@@ -51,19 +52,23 @@ export class localStorageService {
 
   // Iniciar sesión
   login(nombre: string, password: string): boolean {
-    const users = this.getAllUsers();
+    const users = this.getAllUsers(); // Supongamos que obtienes todos los usuarios de un almacenamiento
     const foundUser = users.find(
-      (user: any) => user.name === nombre && user.password === password
+        (user: any) => user.name === nombre && user.password === password
     );
 
     if (foundUser) {
-      this.user = foundUser;
-      this.saveUserToLocalStorage();  // Guardar usuario actual
-      return true;
+        this.user = foundUser;
+
+        // Asigna el rol "admin" si el nombre del usuario es "admin"
+        this.user.role = this.user.name === 'admin' ? 'admin' : 'user'; // Asignar 'user' o el rol correspondiente
+
+        this.saveUserToLocalStorage();  // Guardar usuario actual en localStorage
+        return true;
     } else {
-      return false;
+        return false;
     }
-  }
+}
 
   // Obtener el usuario en sesión
   getUser() {
@@ -110,6 +115,7 @@ export class localStorageService {
         instagram: '',
         whatsapp: '',
       },
+      role: 'user',
     };
   }
 

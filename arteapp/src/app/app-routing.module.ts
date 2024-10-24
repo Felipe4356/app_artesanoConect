@@ -32,6 +32,10 @@ const routes: Routes = [
 
   },
   {
+    path: 'eventos',
+    loadChildren: () => import('./eventos/eventos.module').then( m => m.EventosPageModule)
+  },
+  {
     path: 'editor-user',
     loadChildren: () => import('./editor-user/editor-user.module').then( m => m.EditorUserPageModule),
   
@@ -58,6 +62,8 @@ const routes: Routes = [
     path: '**', // Captura cualquier ruta no definida
     redirectTo: '/not-found' // Redirige a la página de no encontrado
   },
+ 
+
 
 
 ];
