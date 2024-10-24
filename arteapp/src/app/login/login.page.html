@@ -1,6 +1,8 @@
+
+
 <ion-header [translucent]="true">
   <ion-toolbar color="secondary" >
-    <ion-title>ArtesanoConect</ion-title>
+    <ion-title style="text-align: center;">ArtesanoConect</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -15,24 +17,24 @@
   
   </div>
   <br><br><br><br>
-  <ion-card>
+  <ion-card  (ngSubmit)="login()">
     <ion-card-header>
-      <ion-title style="text-align: center;"> <img alt="Artesano Connect Logo" src="https://cdn.discordapp.com/attachments/1276343461913821247/1282488188610285702/logo_artesanoconnect.png?ex=66df89b3&is=66de3833&hm=b0690670eeb271cf4ddf8f461554e1e9119070e6175b09745a45350be78e1a84&" class="logo-img" />ArtesanoConect </ion-title>
+      <ion-title style="text-align: center;"> <img alt="Artesano Connect Logo"  src="../img/logo.jpg" class="logo-img" />ArtesanoConect </ion-title>
       <br>
       <ion-card-title style="text-align: center; text-decoration: underline;" >Inicie sesión</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <ion-item>
         <ion-label position="floating">Nombre</ion-label>
-        <ion-input type="text" [(ngModel)]="persona.nombre"></ion-input>
+        <ion-input [(ngModel)]="nombre" name="nombre" required></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Contraseña</ion-label>
-        <ion-input type="password" [(ngModel)]="persona.Password"></ion-input>
+        <ion-input [(ngModel)]="password" name="password" type="password" required></ion-input>
       </ion-item>
       <br><br><br>
       <ion-button expand="full" color="primary" (click)="login()">Login</ion-button>
-      <p>¿No tienes una cuenta? <span  style="color: blue;">Crea una</span></p>
+       no tienes una cuenta? <a [routerLink]="['/register']">Registrarse</a>
     </ion-card-content>
   </ion-card>
 </ion-content>

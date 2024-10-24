@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../AuthService';
+import { localStorageService } from '../services/storagesql.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-usuario',
@@ -9,18 +10,20 @@ import { AuthService } from '../AuthService';
 export class UsuarioPage implements OnInit {
   user: any;
 
-  constructor(private authService: AuthService) { }
+  constructor(private local:localStorageService, private router: Router)  { }
+
+  
 
   ngOnInit() {
-    this.loadUserData();
+    this.user = this.local.getUser();
   }
 
-  ionViewWillEnter() {
-    this.loadUserData();  // Asegura que los datos se recarguen cuando se muestra la página
+  editProfile() {
+    this.router.navigate(['/editor-user']);
   }
 
-  loadUserData() {
-    this.user = this.authService.getUser();
-    console.log('User data loaded:', this.user);
+  logout() {
+    this.local.logout();
+    this.router.navigate(['/login']);
   }
 }

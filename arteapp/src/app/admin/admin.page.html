@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Admin: Lista de Usuarios</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let user of users; let i = index">
+      <ion-label>
+        <h2>{{ user.name }}</h2>
+        <p>ID: {{ user.id }}</p>
+        <p>Email: {{ user.email }}</p>
+      </ion-label>
+      <ion-button color="danger" (click)="deleteUser(i)">
+        Eliminar
+      </ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

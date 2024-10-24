@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../AuthService';
-
+import { localStorageService } from '../services/storagesql.service';
 import { AlertController } from '@ionic/angular';
 
 @Component({
@@ -10,26 +9,37 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  nombre: string = '';
+  password: string = '';
+  loguiado: boolean = false;
 
-  direccion = "egana 123"
-  persona={
-    nombre:'',
-    apellido:'',
-    Password:''
-  }
-  constructor(private authService: AuthService, private router: Router  ,private alertController: AlertController) { }
+  constructor(private local: localStorageService, private router: Router, private alertCtrl: AlertController) {}
+
+  ngOnInit() {}
 
   async login() {
-    if (this.authService.login(this.persona.nombre, this.persona.Password)) {
-      await this.showWelcomeAlert(this.persona.nombre);
-      this.router.navigate(['/home']); // Navega a la página de inicio después del login
+    if (this.local.login(this.nombre, this.password)) {
+      // Si el login es exitoso, redirigir a la página de inicio
+      await this.showWelcomeAlert(this.nombre);
+      this.router.navigateByUrl('/home');
     } else {
-      console.log('Error en la autenticación');
+      // Mostrar alerta si el login falla
+      const alert = await this.alertCtrl.create({
+        header: 'Error',
+        message: 'Usuario o contraseña incorrectos',
+        buttons: ['OK']
+      });
+      await alert.present();
     }
   }
 
+  //ir page register
+  register(){
+    this.router.navigateByUrl('/register');
+  }
+
   async showWelcomeAlert(nombre: string) {
-    const alert = await this.alertController.create({
+    const alert = await this.alertCtrl.create({
       header: '¡Bienvenido!',
       message: `Hola, ${nombre}. ¡Bienvenido de nuevo!`,
       buttons: ['OK']
@@ -37,10 +47,4 @@ export class LoginPage implements OnInit {
 
     await alert.present();
   }
-
-
-  ngOnInit() {
-    console.log("iniciar")
-  }
-
 }

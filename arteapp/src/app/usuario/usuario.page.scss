@@ -5,13 +5,24 @@
   
 
   .profile-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 16px;
-    
+  text-align: center;
+  //botton chicar por los lados
+  display: flexbox;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2px;
   }
   
+
+  .btn_edit
+  {
+    background-color: #f9f9f9;
+
+    border: 2px solid #ddd;
+
+    display: inline-block;
+
+  }
   .profile-picture {
     flex: 1;
     text-align: center;
@@ -32,12 +43,12 @@
   
   .profile-info h2 {
     margin: 0;
-    font-size: 1.5em;
+    font-size: 1.1em;
     font-weight: bold;
   }
   
   .profile-info p {
-    margin: 8px 0;
+    margin: 1px 0;
     color: #666;
   }
   

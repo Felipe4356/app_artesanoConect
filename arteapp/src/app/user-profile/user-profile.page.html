@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>ArtesanoConect</ion-title>
+    <!-- Agregar el botón de logout aquí -->
+    <ion-buttons slot="end">
+      
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="user" class="profile-content" color="light">
+  <br>
+  <div class="profile-header">
+    <div class="profile-picture">
+      <img [src]="user.profileImage" alt="Profile Image">
+    </div>
+    <div class="profile-info">
+      <h2>{{ user.name }}</h2>
+    </div>
+  </div>
+
+  <ion-grid>
+    <div style="display: inline-flex; gap: 15px; justify-content: center;">
+      <div *ngIf="user.socialLinks.facebook">
+        <a [href]="user.socialLinks.facebook" target="_blank" style="text-decoration: none; color: black;">
+          Facebook <ion-icon style="color: blue;" name="logo-facebook"></ion-icon>
+        </a>
+      </div>
+      
+      <div *ngIf="user.socialLinks.instagram">
+        <a [href]="user.socialLinks.instagram" target="_blank" style="  text-decoration: none; color: black;">
+          Instagram <ion-icon style="color: rgb(192, 54, 12);" name="logo-instagram"></ion-icon>
+        </a>
+      </div>
+      
+      <div *ngIf="user.socialLinks.whatsapp">
+        <a [href]="'https://wa.me/' + user.socialLinks.whatsapp" target="_blank" style=" text-decoration: none; color: black;">
+          Whatsapp <ion-icon style="color: rgb(37, 211, 102);" name="logo-whatsapp"></ion-icon>
+        </a>
+      </div>
+    </div>
+    
+    <div *ngIf="user.bio">
+      <p>Dirección: {{user.direccion}}</p>
+      <p>Biografía: {{ user.bio }}</p>
+    </div>
+    <h3>Artesanías:</h3>
+    <ion-row class="product-images">
+      <div *ngIf="user.productImages.length === 0">
+        <p>No hay imágenes de productos</p>
+      </div>
+      <ion-col size="4" *ngFor="let img of user.productImages">
+        <ion-img [src]="img"></ion-img>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-tab-bar slot="bottom">
+  <ion-tab-button tab="home" [routerLink]="['/home']">
+    <ion-icon name="home"></ion-icon>
+    <ion-label>Home</ion-label>
+  </ion-tab-button>
+
+  <ion-tab-button tab="usuario" [routerLink]="['/usuario']">
+    <ion-icon name="person"></ion-icon>
+    <ion-label>Usuario</ion-label>
+  </ion-tab-button>
+
+  <ion-tab-button tab="map" [routerLink]="['/mapa']">
+    <ion-icon name="map"></ion-icon>
+    <ion-label>Map</ion-label>
+  </ion-tab-button>
+</ion-tab-bar>

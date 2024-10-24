@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title class="title-center" style="text-align: center;">  ArtesanoConect</ion-title>
+    
+  </ion-toolbar>
+</ion-header>
+ <h1 style="text-align: center;">register:</h1>
+<ion-content class="ion-padding custom-background">
+ 
+  <!-- Input para seleccionar la imagen de perfil -->
+  <ion-item class="custom-item">
+    <ion-label position="stacked">Imagen de Perfil</ion-label>
+    <input type="file" (change)="onProfileImageSelected($event)" accept="image/*">
+  </ion-item>
+
+  <ion-img *ngIf="user.profileImage" [src]="user.profileImage" class="profile-image"></ion-img>
+
+  <!-- Campos de registro -->
+  <ion-item class="custom-item">
+    <ion-label position="floating">Nombre</ion-label>
+    <ion-input [(ngModel)]="user.name"></ion-input>
+  </ion-item>
+
+  <ion-item class="custom-item">
+    <ion-label position="floating">Email</ion-label>
+    <ion-input type="email" [(ngModel)]="user.email"></ion-input>
+  </ion-item>
+
+  <ion-item class="custom-item">
+    <ion-label position="floating">Contraseña</ion-label>
+    <ion-input type="password" [(ngModel)]="user.password"></ion-input>
+  </ion-item>
+
+  <ion-item class="custom-item">
+    <ion-label position="floating">Dirección</ion-label>
+    <ion-input [(ngModel)]="user.direccion"></ion-input>
+  </ion-item>
+
+  <ion-item class="custom-item">
+    <ion-label position="floating">Biografía</ion-label>
+    <ion-textarea [(ngModel)]="user.bio"></ion-textarea>
+  </ion-item>
+
+  <!-- Input para agregar imágenes de productos -->
+  <ion-item class="custom-item">
+    <ion-label position="stacked">Imágenes de Productos</ion-label>
+    <input type="file" multiple (change)="onProductImagesSelected($event)" accept="image/*">
+    
+  </ion-item>
+
+  <ion-grid class="image-grid">
+    <ion-row>
+     
+      <ion-col size="4" *ngFor="let image of user.productImages; let i = index">
+        <ion-img [src]="image" class="product-image"></ion-img>
+        <ion-button color="danger" expand="full" (click)="removeProductImage(i)">Remover</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- Botón de registro -->
+  <ion-button expand="full" class="register-button" (click)="register()">Registrar</ion-button>
+  
+</ion-content>
+
