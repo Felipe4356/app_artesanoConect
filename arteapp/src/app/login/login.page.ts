@@ -19,20 +19,27 @@ export class LoginPage implements OnInit {
 
   async login() {
     if (this.local.login(this.nombre, this.password)) {
-      // Si el login es exitoso, redirigir a la página de inicio
-      await this.showWelcomeAlert(this.nombre);
-      this.router.navigateByUrl('/home');
-    } else {
-      // Mostrar alerta si el login falla
-      const alert = await this.alertCtrl.create({
-        header: 'Error',
-        message: 'Usuario o contraseña incorrectos',
-        buttons: ['OK']
-      });
-      await alert.present();
-    }
-  }
+        const currentUser = this.local.getUser();
 
+        // Verifica si el usuario es admin
+        if (currentUser.role === 'admin') {
+            console.log('El usuario es administrador');
+            this.router.navigateByUrl('/admin'); // Redirige a la página de administración
+        } else {
+            console.log('El usuario no es administrador');
+            this.router.navigateByUrl('/home'); // Redirige a la página de inicio para otros usuarios
+        }
+
+        await this.showWelcomeAlert(this.nombre);
+    } else {
+        const alert = await this.alertCtrl.create({
+            header: 'Error',
+            message: 'Usuario o contraseña incorrectos',
+            buttons: ['OK']
+        });
+        await alert.present();
+    }
+}
   //ir page register
   register(){
     this.router.navigateByUrl('/register');
