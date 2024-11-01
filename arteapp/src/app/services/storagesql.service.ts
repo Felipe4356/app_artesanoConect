@@ -17,7 +17,7 @@ export class localStorageService {
       instagram: '',
       whatsapp: '',
     },
-    role: 'user',
+    role: 'usuario_normal', // Cambiado a 'usuario_normal' por defecto
   };
 
   private usersKey = 'users';  // Clave para almacenar los usuarios
@@ -52,23 +52,29 @@ export class localStorageService {
 
   // Iniciar sesión
   login(nombre: string, password: string): boolean {
-    const users = this.getAllUsers(); // Supongamos que obtienes todos los usuarios de un almacenamiento
+    const users = this.getAllUsers();
     const foundUser = users.find(
-        (user: any) => user.name === nombre && user.password === password
+      (user: any) => user.name === nombre && user.password === password
     );
 
     if (foundUser) {
-        this.user = foundUser;
+      this.user = foundUser;
 
-        // Asigna el rol "admin" si el nombre del usuario es "admin"
-        this.user.role = this.user.name === 'admin' ? 'admin' : 'user'; // Asignar 'user' o el rol correspondiente
+      // Asigna el rol basado en el nombre del usuario
+      if (this.user.name === 'admin') {
+        this.user.role = 'admin';
+      } else if (this.user.name === 'emprendedor') {
+        this.user.role = 'emprendedor';
+      } else {
+        this.user.role = 'usuario_normal';
+      }
 
-        this.saveUserToLocalStorage();  // Guardar usuario actual en localStorage
-        return true;
+      this.saveUserToLocalStorage();  // Guardar usuario actual en localStorage
+      return true;
     } else {
-        return false;
+      return false;
     }
-}
+  }
 
   // Obtener el usuario en sesión
   getUser() {
@@ -100,7 +106,7 @@ export class localStorageService {
   }
 
   // Eliminar el usuario de sesión
-  deleteUser(id: number) {
+  deleteUser() {
     localStorage.removeItem(this.currentUserKey);
     this.user = {
       name: '',
@@ -115,12 +121,12 @@ export class localStorageService {
         instagram: '',
         whatsapp: '',
       },
-      role: 'user',
+      role: 'usuario_normal', // Reiniciar rol a 'usuario_normal'
     };
   }
 
   // Cerrar sesión
   logout() {
-    this.deleteUser(0);
+    this.deleteUser();
   }
 }

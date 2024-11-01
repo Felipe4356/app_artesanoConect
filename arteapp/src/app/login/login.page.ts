@@ -19,29 +19,38 @@ export class LoginPage implements OnInit {
 
   async login() {
     if (this.local.login(this.nombre, this.password)) {
-        const currentUser = this.local.getUser();
+      const currentUser = this.local.getUser();
 
-        // Verifica si el usuario es admin
-        if (currentUser.role === 'admin') {
-            console.log('El usuario es administrador');
-            this.router.navigateByUrl('/admin'); // Redirige a la página de administración
-        } else {
-            console.log('El usuario no es administrador');
-            this.router.navigateByUrl('/home'); // Redirige a la página de inicio para otros usuarios
-        }
+      // Redirección según el rol del usuario
+      switch (currentUser.role) {
+        case 'admin':
+          console.log('El usuario es administrador');
+          this.router.navigateByUrl('/admin'); // Redirige a la página de administración
+          break;
+        case 'emprendedor':
+          console.log('El usuario es emprendedor');
+          this.router.navigateByUrl('/home'); // Redirige a la página de inicio (puedes personalizar esto)
+          break;
+        case 'usuario_normal':
+        default:
+          console.log('El usuario es normal');
+          this.router.navigateByUrl('/home'); // Redirige a la página de inicio para usuarios normales
+          break;
+      }
 
-        await this.showWelcomeAlert(this.nombre);
+      await this.showWelcomeAlert(this.nombre);
     } else {
-        const alert = await this.alertCtrl.create({
-            header: 'Error',
-            message: 'Usuario o contraseña incorrectos',
-            buttons: ['OK']
-        });
-        await alert.present();
+      const alert = await this.alertCtrl.create({
+        header: 'Error',
+        message: 'Usuario o contraseña incorrectos',
+        buttons: ['OK']
+      });
+      await alert.present();
     }
-}
-  //ir page register
-  register(){
+  }
+
+  // Ir a la página de registro
+  register() {
     this.router.navigateByUrl('/register');
   }
 
@@ -54,4 +63,19 @@ export class LoginPage implements OnInit {
 
     await alert.present();
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 }

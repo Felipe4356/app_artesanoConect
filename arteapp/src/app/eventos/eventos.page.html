@@ -1,13 +1,22 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>eventos</ion-title>
+    <ion-title>Eventos</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="abrirModal()">Crear Evento</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">eventos</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let evento of eventos">
+      <ion-label>
+        <h2>{{ evento.titulo }}</h2>
+        <h3>{{ evento.subtitulo }}</h3>
+        <p>{{ evento.descripcion }}</p>
+      </ion-label>
+      <ion-button (click)="editarEvento(evento)">Editar</ion-button>
+      <ion-button color="danger" (click)="eliminarEvento(evento)">Eliminar</ion-button>
+    </ion-item>
+  </ion-list>
 </ion-content>

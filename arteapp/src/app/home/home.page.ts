@@ -21,7 +21,7 @@ export class HomePage {
   // Cargar todos los usuarios desde localStorage
   loadUsers() {
     this.users = this.local.getAllUsers();
-    this.filteredUsers = this.users;  // Inicialmente, mostrar todos los usuarios
+    this.filteredUsers = this.users.filter(user => user.role === 'emprendedor'); // Filtrar solo emprendedores
   }
 
   // Filtrar los usuarios según el término de búsqueda
@@ -38,7 +38,7 @@ export class HomePage {
       });
     } else {
       // Si no hay búsqueda, mostrar todos los usuarios
-      this.filteredUsers = this.users;
+      this.filteredUsers = this.users.filter(user => user.role === 'emprendedor'); // Refiltrar solo emprendedores
     }
   }
 

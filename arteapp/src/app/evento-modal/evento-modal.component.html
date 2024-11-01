@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ evento ? 'Editar Evento' : 'Crear Evento' }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()" color="medium">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item>
+      <ion-label position="floating">Título</ion-label>
+      <ion-input [(ngModel)]="titulo" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Subtítulo</ion-label>
+      <ion-input [(ngModel)]="subtitulo" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Descripción</ion-label>
+      <ion-textarea [(ngModel)]="descripcion" rows="5" required></ion-textarea>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="full" (click)="guardarEvento()" color="primary" class="ion-margin-top">
+    Guardar
+  </ion-button>
+</ion-content>

@@ -1,7 +1,5 @@
-
-
 <ion-header [translucent]="true">
-  <ion-toolbar color="secondary" >
+  <ion-toolbar color="secondary">
     <ion-title style="text-align: center;">ArtesanoConect</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -12,29 +10,38 @@
       <ion-title size="large">Login</ion-title>
     </ion-toolbar>
   </ion-header>
-  
+
   <div class="logo-container">
-  
+    <!-- Puedes agregar aquí el logo si es necesario -->
   </div>
+  
   <br><br><br><br>
-  <ion-card  (ngSubmit)="login()">
+  
+  <ion-card (ngSubmit)="login()">
     <ion-card-header>
-      <ion-title style="text-align: center;"> <img alt="Artesano Connect Logo"  src="../img/logo.jpg" class="logo-img" />ArtesanoConect </ion-title>
+      <ion-title style="text-align: center;">
+        <img alt="Artesano Connect Logo" src="../img/logo.jpg" class="logo-img" />
+        ArtesanoConect
+      </ion-title>
       <br>
-      <ion-card-title style="text-align: center; text-decoration: underline;" >Inicie sesión</ion-card-title>
+      <ion-card-title style="text-align: center; text-decoration: underline;">Inicie sesión</ion-card-title>
     </ion-card-header>
+    
     <ion-card-content>
       <ion-item>
         <ion-label position="floating">Nombre</ion-label>
         <ion-input [(ngModel)]="nombre" name="nombre" required></ion-input>
       </ion-item>
+      
       <ion-item>
         <ion-label position="floating">Contraseña</ion-label>
         <ion-input [(ngModel)]="password" name="password" type="password" required></ion-input>
       </ion-item>
+      
       <br><br><br>
+      
       <ion-button expand="full" color="primary" (click)="login()">Login</ion-button>
-       no tienes una cuenta? <a [routerLink]="['/register']">Registrarse</a>
+      <p>No tienes una cuenta? <a [routerLink]="['/register']">Registrarse</a></p>
     </ion-card-content>
   </ion-card>
 </ion-content>
