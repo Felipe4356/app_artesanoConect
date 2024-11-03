@@ -9,6 +9,7 @@
 <ion-content class="ion-padding">
   <h3 style="text-align: center;">Locales:</h3>
 
+  
   <!-- Barra de búsqueda -->
   <ion-searchbar 
     [(ngModel)]="searchTerm" 
@@ -46,5 +47,11 @@
   <ion-tab-button tab="map" [routerLink]="['/mapa']">
     <ion-icon name="map"></ion-icon>
     <ion-label>Map</ion-label>
+  </ion-tab-button>
+
+  <!-- eventos -->
+  <ion-tab-button tab="eventos" [routerLink]="['/eventos']">
+    <ion-icon name="calendar"></ion-icon>
+    <ion-label>Eventos</ion-label>
   </ion-tab-button>
 </ion-tab-bar>

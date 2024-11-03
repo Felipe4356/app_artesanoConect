@@ -1,23 +1,17 @@
 <ion-header [translucent]="true">
-  <ion-toolbar  color="secondary" >
-    <ion-title style="color: white ;">ArtesanoConect</ion-title>
+  <ion-toolbar color="secondary">
+    <ion-title style="color: white;">ArtesanoConect</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" color="light">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">mapa</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  
+  <app-map></app-map>
+ 
+
 
   
-  
-  <ion-searchbar></ion-searchbar>
-  <br><br>
-  <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1161.4717995724777!2d-72.96283183942137!3d-41.485853989145944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2scl!4v1725595184085!5m2!1ses-419!2scl" width="360" height="450" style="border:10; border-color: aliceblue;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 </ion-content>
-
 
 <ion-tab-bar slot="bottom">
   <ion-tab-button tab="home" [routerLink]="['/home']">

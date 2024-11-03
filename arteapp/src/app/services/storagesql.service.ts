@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class localStorageService {
+ 
   private user = {
     name: '',
     password: '',
@@ -20,78 +21,70 @@ export class localStorageService {
     role: 'user',
   };
 
-  private usersKey = 'users';  // Clave para almacenar los usuarios
-  private currentUserKey = 'user';  // Clave para el usuario actual
+   private newEvent: any = { title: '', date: '', description: '' };
+
+  private usersKey = 'users'; // Clave para almacenar los usuarios
+  private currentUserKey = 'user'; // Clave para el usuario actual
+  private EVENTS_KEY = 'events'; // Inicializamos correctamente la clave para eventos
+  private LOCATIONS_KEY = 'locations'; // Clave para almacenar ubicaciones
 
   constructor() {
     this.loadUserFromLocalStorage();
   }
 
-  // Guardar o actualizar un usuario
+  // Métodos para usuarios
   saveUser(newUser: any) {
     const users = this.getAllUsers();
     const userIndex = users.findIndex((user: any) => user.email === newUser.email);
 
     if (userIndex !== -1) {
-      // Si el usuario existe, lo actualiza
       users[userIndex] = newUser;
     } else {
-      // Si no existe, lo agrega como un nuevo usuario
       users.push(newUser);
     }
 
     localStorage.setItem(this.usersKey, JSON.stringify(users));
-    this.setCurrentUser(newUser);  // Actualizar el usuario en sesión
+    this.setCurrentUser(newUser);
   }
 
-  // Obtener todos los usuarios
   getAllUsers() {
     const users = localStorage.getItem(this.usersKey);
     return users ? JSON.parse(users) : [];
   }
 
-  // Iniciar sesión
   login(nombre: string, password: string): boolean {
-    const users = this.getAllUsers(); // Supongamos que obtienes todos los usuarios de un almacenamiento
+    const users = this.getAllUsers();
     const foundUser = users.find(
-        (user: any) => user.name === nombre && user.password === password
+      (user: any) => user.name === nombre && user.password === password
     );
 
     if (foundUser) {
-        this.user = foundUser;
-
-        // Asigna el rol "admin" si el nombre del usuario es "admin"
-        this.user.role = this.user.name === 'admin' ? 'admin' : 'user'; // Asignar 'user' o el rol correspondiente
-
-        this.saveUserToLocalStorage();  // Guardar usuario actual en localStorage
-        return true;
+      this.user = foundUser;
+      this.user.role = this.user.name === 'admin' ? 'admin' : 'user';
+      this.saveUserToLocalStorage();
+      return true;
     } else {
-        return false;
+      return false;
     }
-}
+  }
 
-  // Obtener el usuario en sesión
   getUser() {
     return this.user;
   }
 
-  // Establecer el usuario actual
   setCurrentUser(user: any) {
     this.user = user;
     this.saveUserToLocalStorage();
   }
 
-  // Obtener el nombre del usuario en sesión
   getNombreUsuario(): string {
     return this.user.name;
   }
 
-  // Guardar el usuario actual en localStorage
   private saveUserToLocalStorage() {
     localStorage.setItem(this.currentUserKey, JSON.stringify(this.user));
   }
 
-  // Cargar el usuario actual desde localStorage
   private loadUserFromLocalStorage() {
     const userData = localStorage.getItem(this.currentUserKey);
     if (userData) {
@@ -99,7 +92,6 @@ export class localStorageService {
     }
   }
 
-  // Eliminar el usuario de sesión
   deleteUser(id: number) {
     localStorage.removeItem(this.currentUserKey);
     this.user = {
@@ -119,8 +111,65 @@ export class localStorageService {
     };
   }
 
-  // Cerrar sesión
   logout() {
     this.deleteUser(0);
   }
+
+  // --- Métodos para eventos ---
+  getAllEvents(): any[] {
+    const events = localStorage.getItem(this.EVENTS_KEY);
+    return events ? JSON.parse(events) : [];
+  }
+
+  addEvent(event: any): void {
+    const events = this.getAllEvents();
+    events.push(event);
+    localStorage.setItem(this.EVENTS_KEY, JSON.stringify(events));
+  }
+
+  deleteEvent(index: number): void {
+    const events = this.getAllEvents();
+    events.splice(index, 1);
+    localStorage.setItem(this.EVENTS_KEY, JSON.stringify(events));
+  }
+
+  // Métodos para Ubicaciones (Solo agregar, sin modificar el código existente)
+
+   // Clave para almacenar ubicaciones
+
+  // Obtiene todas las ubicaciones guardadas en localStorage
+  getAllLocations(): any[] {
+    const locations = localStorage.getItem(this.LOCATIONS_KEY);
+    return locations ? JSON.parse(locations) : [];
+  }
+
+  // Agrega una nueva ubicación a localStorage
+  addLocation(location: any): void {
+    const locations = this.getAllLocations();
+    locations.push(location);
+    localStorage.setItem(this.LOCATIONS_KEY, JSON.stringify(locations));
+  }
+
+  // Elimina una ubicación específica en localStorage por índice
+  deleteLocation(index: number): void {
+    const locations = this.getAllLocations();
+    locations.splice(index, 1);
+    localStorage.setItem(this.LOCATIONS_KEY, JSON.stringify(locations));
+  }
+
+  saveLocation(location: any): void {
+    const locations = this.getAllLocations();
+    locations.push(location);
+    localStorage.setItem('locations', JSON.stringify(locations));
+  }
+
+
+  removeLocation(locationId: string): void {
+    const locations = this.getAllLocations();
+    const newLocations = locations.filter((location: any) => location.id !== locationId);
+    localStorage.setItem('locations', JSON.stringify(newLocations));
+  }
+  
+  
+
 }

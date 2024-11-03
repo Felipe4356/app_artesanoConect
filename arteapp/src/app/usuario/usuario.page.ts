@@ -23,7 +23,11 @@ export class UsuarioPage implements OnInit {
   }
 
   logout() {
-    this.local.logout();
-    this.router.navigate(['/login']);
+ 
+   //has lo mismo donde se navega url para volvera a la pagina de login
+    this.local.logout
+    console.log('Sesión cerrada');
+
+    this.router.navigateByUrl('/login');
   }
 }
