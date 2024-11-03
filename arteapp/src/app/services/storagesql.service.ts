@@ -150,12 +150,14 @@ export class localStorageService {
     localStorage.setItem(this.LOCATIONS_KEY, JSON.stringify(locations));
   }
 
-  // Elimina una ubicación específica en localStorage por índice
-  deleteLocation(index: number): void {
-    const locations = this.getAllLocations();
-    locations.splice(index, 1);
-    localStorage.setItem(this.LOCATIONS_KEY, JSON.stringify(locations));
-  }
+  
+  // Elimina una ubicación específica en localStorage por id
+removeLocation(locationId: string): void {
+  const locations = this.getAllLocations();
+  const newLocations = locations.filter((location: any) => location.id !== locationId);
+  localStorage.setItem(this.LOCATIONS_KEY, JSON.stringify(newLocations));
+}
+
 
   saveLocation(location: any): void {
     const locations = this.getAllLocations();
@@ -164,12 +166,8 @@ export class localStorageService {
   }
 
 
-  removeLocation(locationId: string): void {
-    const locations = this.getAllLocations();
-    const newLocations = locations.filter((location: any) => location.id !== locationId);
-    localStorage.setItem('locations', JSON.stringify(newLocations));
-  }
   
   
+
 
 }

@@ -16,7 +16,7 @@ export class MapComponent implements OnInit, OnDestroy {
   user: any;
 
   customIcon = icon({
-    iconUrl: 'assets/img/logo.jpg', // URL del icono por defecto
+    iconUrl: 'assets/img/marcador-de-posicion.png', // URL del icono por defecto
     
     iconSize: [32, 32],
     iconAnchor: [16, 32],
@@ -143,9 +143,9 @@ export class MapComponent implements OnInit, OnDestroy {
   }
   // Método para eliminar una ubicación guardada
   deleteLocation(index: number) {
-    const locationId = this.locations[index].id;
-    this.locations.splice(index, 1);
-    this.local.deleteLocation(locationId);
-    this.reloadMap();
+    const locationId = this.locations[index].id; // Obtener el id de la ubicación
+    this.locations.splice(index, 1); // Eliminar la ubicación de la lista local
+    this.local.removeLocation(locationId); // Eliminar la ubicación del localStorage
+    this.reloadMap(); // Recargar el mapa para reflejar los cambios
   }
 }
