@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { localStorageService } from '../services/storagesql.service';
 
 @Component({
   selector: 'app-eventos',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./eventos.page.scss'],
 })
 export class EventosPage implements OnInit {
+  eventos: any[] = [];  // Array para almacenar los eventos
 
-  constructor() { }
+  constructor(private local: localStorageService) { }
 
   ngOnInit() {
+    this.getEventos();
   }
 
+  getEventos() {
+    this.eventos = this.local.getAllEvents();
+  }
 }

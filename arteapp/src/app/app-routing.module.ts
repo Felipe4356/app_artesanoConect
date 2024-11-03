@@ -6,7 +6,7 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
-    data: { animation: 'slideInLeft' }
+
     
     
   },
@@ -23,12 +23,12 @@ const routes: Routes = [
   
   { path: 'usuario',
     loadChildren: () => import('./usuario/usuario.module').then( m => m.UsuarioPageModule),
-    data: { animation: 'slideInLeft' },
+
     
   },
   { path: 'mapa',
     loadChildren: () => import('./mapa/mapa.module').then( m => m.MapaPageModule),
-    data: { animation: 'slideInLeft' },
+  
 
   },
   {

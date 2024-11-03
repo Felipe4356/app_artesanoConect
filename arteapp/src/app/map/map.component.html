@@ -1,0 +1,37 @@
+<h2 style="text-align: center;">Mapa de locales Artesanías</h2>
+
+<div id="map"></div>
+
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <ion-button class="btn-mapa" expand="full" (click)="showCurrentLocation()">
+        <ion-icon name="navigate-outline"></ion-icon>
+      </ion-button>  
+    </ion-col>
+    <ion-col>
+      <ion-button  class="btn-mapa" expand="full" (click)="reloadMap()">
+        <ion-icon name="refresh-outline"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+<p style="text-align: center;">Ingrese su ubicación de su local<br> con Coordenadas</p>
+
+<ion-item class="input-cord">
+  <ion-label position="floating"></ion-label>
+  <ion-input type="text" [(ngModel)]="coordinates"></ion-input>
+  <ion-button  class="btn-add" slot="end" (click)="addLocation()"><ion-icon name="add-circle"></ion-icon></ion-button>
+</ion-item>
+
+<div *ngIf="locations.length > 0" style="margin-top: 20px;">
+  <h3>Ubicaciones locales</h3>
+  <ion-list>
+    <ion-item *ngFor="let location of locations; let i = index">
+      <div>Agregado por: {{ location.addedBy }}</div>
+      <ion-button class="btn-go" (click)="goToLocation(location.coordinates)">Ir</ion-button>
+      <ion-button  class="btn-go" *ngIf="location.addedBy.trim() === user.name.trim()" (click)="deleteLocation(i)">Eliminar</ion-button>
+    </ion-item>
+  </ion-list>
+</div>

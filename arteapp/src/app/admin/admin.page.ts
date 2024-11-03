@@ -8,11 +8,14 @@ import { localStorageService } from '../services/storagesql.service';
 export class AdminPage implements OnInit {
 
   users: any[] = [];
+  events: any[] = [];
+  newEvent: any = { name: '', date: '', description: '' };
 
   constructor(private local: localStorageService) {}
 
   ngOnInit() {
     this.loadUsers();
+    this.loadEvents();
   }
 
   loadUsers() {
@@ -22,5 +25,28 @@ export class AdminPage implements OnInit {
   deleteUser(index: number) {
     this.users.splice(index, 1);  // Eliminar el usuario de la lista en la vista
     localStorage.setItem('users', JSON.stringify(this.users));  // Actualizar localStorage
+  }
+
+
+  loadEvents() {
+    this.events = this.local.getAllEvents();
+  }
+
+  addEvent() {
+    if (this.newEvent.name && this.newEvent.date) {
+      console.log('Evento antes de agregar:', this.newEvent); // Verificar el evento a agregar
+      this.local.addEvent(this.newEvent);
+      this.newEvent = { name: '', date: '', description: '' }; // Reset formulario
+      this.loadEvents(); // Recargar eventos
+    } else {
+      console.log('Faltan campos obligatorios'); // Detectar si hay campos vacíos
+    }
+  }
+
+
+    
+  deleteEvent(index: number) {
+    this.local.deleteEvent(index);
+    this.loadEvents(); // Recargar eventos después de eliminar
   }
 }
