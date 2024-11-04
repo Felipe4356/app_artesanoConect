@@ -16,14 +16,23 @@ export class AutenticacionService {
         return this.usuarioLogueado;
     }
 
-      // Método para simular el inicio de sesión.
-     iniciarSesion() {
-     this.usuarioLogueado = true;
-     }
+     
 
      // Método para simular el cierre de sesión.
     cerrarSesion() {
         this.usuarioLogueado = false;
+    }
+
+    // si no esta logueado no puede acceder a la pagina url
+    canActivate(): boolean {
+        if (!this.usuarioLogueado) {
+            console.log('No estás logueado');
+            return false;
+        }
+        console.log('Estás logueado');
+        return true;
+
+        
     }
 
 }

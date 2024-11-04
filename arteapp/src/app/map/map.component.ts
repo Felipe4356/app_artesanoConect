@@ -130,7 +130,6 @@ export class MapComponent implements OnInit, OnDestroy {
     const location = new LatLng(lat, lng);
     this.map.setView(location, 13);
   }
-
   // Recargar el mapa
   reloadMap() {
     if (this.map) {

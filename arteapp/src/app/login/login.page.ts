@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { localStorageService } from '../services/storagesql.service';
 import { AlertController } from '@ionic/angular';
+import { AutenticacionService } from '../autenticacion.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ export class LoginPage implements OnInit {
   password: string = '';
   loguiado: boolean = false;
 
-  constructor(private local: localStorageService, private router: Router, private alertCtrl: AlertController) {}
+  constructor(private local: localStorageService, private router: Router, private alertCtrl: AlertController, private guard: AutenticacionService) {}
 
   ngOnInit() {}
 
@@ -25,9 +26,14 @@ export class LoginPage implements OnInit {
         if (currentUser.role === 'admin') {
             console.log('El usuario es administrador');
             this.router.navigateByUrl('/admin'); // Redirige a la página de administración
+            this.guard.estaLogueado();
+            console.log('Usuario logueado admin');
         } else {
             console.log('El usuario no es administrador');
             this.router.navigateByUrl('/home'); // Redirige a la página de inicio para otros usuarios
+            this.guard.estaLogueado();
+            console.log('Usuario logueado');
+            
         }
 
         await this.showWelcomeAlert(this.nombre);
