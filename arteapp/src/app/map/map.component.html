@@ -25,13 +25,24 @@
   <ion-button  class="btn-add" slot="end" (click)="addLocation()"><ion-icon name="add-circle"></ion-icon></ion-button>
 </ion-item>
 
-<div *ngIf="locations.length > 0" style="margin-top: 20px;">
-  <h3>Ubicaciones locales</h3>
-  <ion-list>
-    <ion-item *ngFor="let location of locations; let i = index">
-      <div>Agregado por: {{ location.addedBy }}</div>
-      <ion-button class="btn-go" (click)="goToLocation(location.coordinates)">Ir</ion-button>
-      <ion-button  class="btn-go" *ngIf="location.addedBy.trim() === user.name.trim()" (click)="deleteLocation(i)">Eliminar</ion-button>
-    </ion-item>
-  </ion-list>
-</div>
+<ion-button id="open-modal" expand="block">tiendas</ion-button>
+
+<ion-content class="ion-padding">
+ 
+  <ion-modal trigger="open-modal" [initialBreakpoint]="1" [breakpoints]="[0, 1]">
+    <ng-template>
+      <div *ngIf="locations.length > 0" style="margin-top: 20px;">
+        <h3>Ubicaciones locales</h3>
+        <ion-list>
+          <ion-item *ngFor="let location of locations; let i = index">
+            <div>{{ location.addedBy }}</div>
+
+            <ion-button class="btn-go" (click)="goToLocation(location.coordinates)">Ir</ion-button>
+            <ion-button  class="btn-go" *ngIf="location.addedBy.trim() === user.name.trim()" (click)="deleteLocation(i)">Eliminar</ion-button>
+          </ion-item>
+        </ion-list>
+      </div>
+      
+    </ng-template>
+  </ion-modal>
+</ion-content>
