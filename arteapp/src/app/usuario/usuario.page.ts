@@ -9,13 +9,15 @@ import { Router } from '@angular/router';
 })
 export class UsuarioPage implements OnInit {
   user: any;
-
+  isAdmin: boolean = false;
   constructor(private local:localStorageService, private router: Router)  { }
 
   
 
   ngOnInit() {
+    this.isAdmin = this.user && this.user.name === 'admin'; 
     this.user = this.local.getUser();
+    
   }
 
   editProfile() {
@@ -24,10 +26,22 @@ export class UsuarioPage implements OnInit {
 
   logout() {
  
-   //has lo mismo donde se navega url para volvera a la pagina de login
-    this.local.logout
-    console.log('Sesión cerrada');
-
+   //has lo mismo donde se navega url para volvera a la pagina de login quita los datos del usuario para poder ingresar de nuevo con otro usuario
+    this.local.logout();
     this.router.navigateByUrl('/login');
+
+
+   
+
   }
+
+
+  goToAdminPage() {
+    // Navegar a la página de administración
+    this.router.navigate(['/admin']);
+  }
+
+
+  
+  
 }

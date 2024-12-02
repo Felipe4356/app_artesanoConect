@@ -95,6 +95,7 @@ export class localStorageService {
   deleteUser(id: number) {
     localStorage.removeItem(this.currentUserKey);
     this.user = {
+      
       name: '',
       password: '',
       email: '',
@@ -166,8 +167,22 @@ removeLocation(locationId: string): void {
   }
 
 
-  
-  
 
+  destroyLocations() {
+    localStorage.removeItem('user');
+    console.log('usuario quitado');
+  }
+  
+  recoverPassword(name: string, newPassword: string): boolean {
+    const users = this.getAllUsers();
+    const userIndex = users.findIndex((user: any) => user.name === name);
+  
+    if (userIndex !== -1) {
+      users[userIndex].password = newPassword;
+      localStorage.setItem(this.usersKey, JSON.stringify(users));
+      return true; // Indica que la contraseña fue actualizada
+    }
+    return false; // Indica que no se encontró al usuario
+  }
 
 }

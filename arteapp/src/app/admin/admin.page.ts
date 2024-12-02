@@ -6,7 +6,7 @@ import { localStorageService } from '../services/storagesql.service';
   styleUrls: ['./admin.page.scss'],
 })
 export class AdminPage implements OnInit {
-
+  roles: string[] = ['user', 'admin']; // Roles disponibles
   users: any[] = [];
   events: any[] = [];
   newEvent: any = { name: '', date: '', description: '' };
@@ -21,6 +21,16 @@ export class AdminPage implements OnInit {
   loadUsers() {
     this.users = this.local.getAllUsers();
   }
+
+    // Método para actualizar el rol de un usuario
+    updateRole(user: any, newRole: string) {
+      if (user.role !== newRole) {
+        user.role = newRole;
+        this.local.saveUser(user); // Guardar cambios en localStorage
+        console.log(`Rol de ${user.name} actualizado a ${newRole}`);
+      }
+    }
+  
 
   deleteUser(index: number) {
     this.users.splice(index, 1);  // Eliminar el usuario de la lista en la vista

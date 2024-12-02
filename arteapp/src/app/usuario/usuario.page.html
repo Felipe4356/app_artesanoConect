@@ -21,7 +21,7 @@
     <div class="profile-info">
       <h2>{{ user.name }}</h2> 
       
-      
+      <ion-button *ngIf="isAdmin" class="btn_edit" size="default" expand="block" (click)="goToAdminPage()">Admin</ion-button>
       <ion-button class="btn_edit" size="default" expand="block" [routerLink]="['/editor-user']">Editar Perfil</ion-button>
     </div>
   </div>

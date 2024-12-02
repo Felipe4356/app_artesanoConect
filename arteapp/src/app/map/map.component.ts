@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Map, marker, tileLayer, icon,LatLng } from 'leaflet';
 import { Geolocation } from '@capacitor/geolocation';
 import { localStorageService } from '../services/storagesql.service';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-map',
@@ -12,11 +13,11 @@ export class MapComponent implements OnInit, OnDestroy {
   map!: Map;
   userMarker: any;
   coordinates: string = '';
-  locations: any[] = []; // Lista de ubicaciones guardadas
+  locations: any[] = [];
   user: any;
 
   customIcon = icon({
-    iconUrl: 'assets/img/marcador-de-posicion.png', // URL del icono por defecto
+    iconUrl: 'assets/img/marcador-de-posicion.png', 
     
     iconSize: [32, 32],
     iconAnchor: [16, 32],
@@ -24,7 +25,6 @@ export class MapComponent implements OnInit, OnDestroy {
   });
 
 
-  //agregar otro icono
   customIcon2 = icon({
     iconUrl: 'assets/img/puntero-del-mapa.png', // URL del icono por defecto
     
@@ -34,12 +34,12 @@ export class MapComponent implements OnInit, OnDestroy {
   });
   
 
-  constructor(private local: localStorageService) {}
+  constructor(private local: localStorageService , private modalController: ModalController, ) {}
 
   ngOnInit() {
     this.initMap();
-    this.loadLocations(); // Cargar ubicaciones guardadas al iniciar
-    this.user = this.local.getUser(); // Obtener datos del usuario
+    this.loadLocations(); 
+    this.user = this.local.getUser(); 
 
   }
 
@@ -51,7 +51,7 @@ export class MapComponent implements OnInit, OnDestroy {
   }
 
   initMap() {
-    this.map = new Map('map').setView([-41.48323252132218, -72.95893067652796], 12);
+    this.map = new Map('map').setView([-41.47077914182604, -72.92665716118523], 12);
     tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
     }).addTo(this.map);
@@ -73,7 +73,7 @@ export class MapComponent implements OnInit, OnDestroy {
       .openPopup();
   }
 
-  // Método para agregar una ubicación ingresada manualmente
+  
   addLocation() {
     if (!this.coordinates) {
       alert('Por favor, ingresa coordenadas en el formato "latitud, longitud".');
@@ -96,18 +96,16 @@ export class MapComponent implements OnInit, OnDestroy {
       addedBy: addedBy,
     };
 
-    // Usar el icono personalizado al agregar el marcador
-    this.addMarker(lat, lng, addedBy);
+       this.addMarker(lat, lng, addedBy);
 
     this.map.setView(location, 13);
 
-    // Guardar en localStorage y actualizar la lista local
-    this.local.saveLocation(newLocation);
+        this.local.saveLocation(newLocation);
     this.locations.push(newLocation);
     this.coordinates = '';
   }
 
-  // Cargar ubicaciones guardadas desde localStorage
+ 
   loadLocations() {
     this.locations = this.local.getAllLocations();
     this.locations.forEach(location => {
@@ -116,36 +114,53 @@ export class MapComponent implements OnInit, OnDestroy {
     });
   }
 
-  // Método para agregar un marcador al mapa
+ 
   addMarker(lat: number, lng: number, addedBy: string) {
     marker([lat, lng], { icon: this.customIcon2 }) // Usar el icono personalizado
       .addTo(this.map)
-      .bindPopup(`Ubicación guardada por ${addedBy}`)
+      .bindPopup(`tienda de  ${addedBy}`)
       .openPopup();
   }
 
-  // Navegar a una ubicación guardada en el mapa
-  goToLocation(coordinates: string) {
+  
+  async goToLocation(coordinates: string) {
     const [lat, lng] = coordinates.split(',').map(coord => parseFloat(coord.trim()));
     const location = new LatLng(lat, lng);
     this.map.setView(location, 13);
-  }
+  
+    const modal = await this.modalController.getTop();
+    if (modal) { await modal.dismiss();
+    }
 
-  // Recargar el mapa
+    
+  }
+  
+
+ 
   reloadMap() {
     if (this.map) {
       this.map.remove();
       console.log('Mapa destruido');
     }
     this.initMap();
-    this.loadLocations(); // Recarga también las ubicaciones guardadas
-    this.showCurrentLocation(); // Muestra la ubicación actual al recargar
+    this.loadLocations(); 
+    this.showCurrentLocation();
+   
   }
-  // Método para eliminar una ubicación guardada
+  
   deleteLocation(index: number) {
-    const locationId = this.locations[index].id; // Obtener el id de la ubicación
-    this.locations.splice(index, 1); // Eliminar la ubicación de la lista local
-    this.local.removeLocation(locationId); // Eliminar la ubicación del localStorage
-    this.reloadMap(); // Recargar el mapa para reflejar los cambios
+    const locationId = this.locations[index].id; 
+    this.locations.splice(index, 1); 
+    this.local.removeLocation(locationId); 
+    this.reloadMap(); 
+  }
+
+  async closeModal() {
+    const modal = await this.modalController.getTop(); 
+    if (modal) {
+      await modal.dismiss(); 
+    }
   }
 }
+  
+

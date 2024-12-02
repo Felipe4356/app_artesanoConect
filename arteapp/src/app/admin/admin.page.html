@@ -7,9 +7,9 @@
 <ion-content>
 
   <!-- Sección para eliminar usuarios -->
-  <ion-card> 
+  <ion-card>
     <ion-card-header>
-      <ion-card-title>Eliminar Usuario</ion-card-title>
+      <ion-card-title>Usuarios</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <ion-list>
@@ -17,10 +17,17 @@
           <ion-label>
             <h2>{{ user.name }}</h2>
             <p>Email: {{ user.email }}</p>
+            <p>Rol actual: {{ user.role }}</p>
           </ion-label>
-          <ion-button color="danger" (click)="deleteUser(i)">
-            Eliminar
-          </ion-button>
+          <ion-select
+            [(ngModel)]="user.role"
+            (ionChange)="updateRole(user, user.role)"
+          >
+            <ion-select-option *ngFor="let role of roles" [value]="role">
+              {{ role }}
+            </ion-select-option>
+          </ion-select>
+          <ion-button color="danger" (click)="deleteUser(i)">Eliminar</ion-button>
         </ion-item>
       </ion-list>
     </ion-card-content>

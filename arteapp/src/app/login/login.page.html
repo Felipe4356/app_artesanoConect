@@ -35,7 +35,9 @@
       </ion-item>
       <br><br><br>
       <ion-button expand="full" color="primary" (click)="login()">Login</ion-button>
-       no tienes una cuenta? <a [routerLink]="['/register']">Registrarse</a>
+       no tienes una cuenta? <a [routerLink]="['/register']">Registrarse</a><br>
+       olvidaste la contraseá?
+       <a expand="full" color="tertiary" (click)="recoverPassword()">Recuperar </a>
     </ion-card-content>
   </ion-card>
 </ion-content>

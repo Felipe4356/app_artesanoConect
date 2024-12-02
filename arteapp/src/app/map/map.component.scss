@@ -1,7 +1,12 @@
 
 
 #map {
-    height: 192px; /* Por ejemplo, ajusta la altura para pantallas pequeñas */
+    height: 250px; /* Por ejemplo, ajusta la altura para pantallas pequeñas */
+    width: 100%;
+  //agregar color a los bordes del mapa
+    border: 1px solid #6c6b6b;
+
+    margin: 10px 0;
 
 }
 
@@ -43,5 +48,16 @@
   margin-left: auto;
   margin-right: auto;
   text-align: center;
+  color: blue;
 }
 
+.btn-shop{
+  margin: 10px 0;
+  width: 21%;
+  max-width: 300px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  color: blue;
+}
