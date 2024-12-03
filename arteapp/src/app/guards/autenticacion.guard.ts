@@ -6,24 +6,11 @@ import { localStorageService } from '../services/storagesql.service';
   providedIn: 'root',
 })
 export class AutenticacionGuard implements CanActivate {
-  constructor(private local: localStorageService, private router: Router) {}
-
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    const currentUser = this.local.getUser();
-
-    if (currentUser) {
-      if (currentUser.role === 'admin') {
-       
-        return true;
-      } else {
-
-        this.router.navigateByUrl('/home');
-        return false;
-      }
-    }
-
-   
-    this.router.navigateByUrl('/login');
-    return false;
+  constructor(private router: Router) {}
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): MaybeAsync<GuardResult> {
+    throw new Error('Method not implemented.');
   }
-} 
+
+
+  
+}
