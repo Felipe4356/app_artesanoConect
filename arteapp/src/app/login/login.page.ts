@@ -25,7 +25,7 @@ export class LoginPage implements OnInit {
         // Verifica si el usuario es admin
         if (currentUser.role === 'admin') {
             console.log('El usuario es administrador');
-            this.router.navigateByUrl('/admin'); // Redirige a la página de administr
+            this.router.navigateByUrl('/home'); // Redirige a la página de administr
             
         } else {
             console.log('El usuario no es administrador');

@@ -22,14 +22,14 @@ export class AdminPage implements OnInit {
     this.users = this.local.getAllUsers();
   }
 
-    // Método para actualizar el rol de un usuario
-    updateRole(user: any, newRole: string) {
-      if (user.role !== newRole) {
-        user.role = newRole;
-        this.local.saveUser(user); // Guardar cambios en localStorage
-        console.log(`Rol de ${user.name} actualizado a ${newRole}`);
-      }
+  updateRole(user: any, newRole: string) {
+    if (user.role !== newRole) {
+      user.role = newRole;
+      this.local.saveUser(user); // Guardar cambios en localStorage
+      console.log(`Rol de ${user.name} actualizado a ${newRole}`);
+      this.loadUsers(); // Recargar la lista de usuarios para reflejar cambios
     }
+  }
   
 
   deleteUser(index: number) {
