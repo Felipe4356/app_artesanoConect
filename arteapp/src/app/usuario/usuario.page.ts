@@ -15,9 +15,10 @@ export class UsuarioPage implements OnInit {
   
 
   ngOnInit() {
-    this.isAdmin = this.user && this.user.name === 'admin'; 
     this.user = this.local.getUser();
     
+    this.isAdmin = this.user && this.user.name === 'admin'; 
+   
   }
 
   editProfile() {
