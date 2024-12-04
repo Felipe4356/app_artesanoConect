@@ -37,3 +37,76 @@
     font-size: 14px;
   }
   
+
+  //dar resposive para tablet
+  @media (min-width: 1136px) {
+    .login-content {
+      height: 100vh;
+    }
+
+    .login-content {
+    
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+      padding: 160px;
+      box-sizing: border-box;
+
+    }
+
+    .logo-img {
+      height: 40px;
+      margin-left: 10px;
+      vertical-align: middle;
+    }
+
+    ion-card {
+      width: 500%;
+      max-width: 600px;
+      //mover a la derceha
+      margin-left: 2500px;
+      
+      
+     
+    }
+  //dar resposive para desktop
+  }
+
+  @media (min-width: 710px) {
+    .login-content {
+      height: 100vh;
+    }
+
+    .login-content {
+    
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+      padding: 160px;
+      box-sizing: border-box;
+
+    }
+
+    .logo-img {
+      height: 40px;
+      margin-left: 10px;
+      vertical-align: middle;
+    }
+
+    ion-card {
+      width: 500%;
+      max-width: 600px;
+      //mover a la derceha
+      margin-left: 50px;
+      
+      
+     
+    }
+  //dar resposive para desktop
+  }

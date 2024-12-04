@@ -1,24 +1,27 @@
-<ion-header> 
-  <ion-toolbar>
-    <ion-title>Administrador de usuarios y eventos</ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Panel de Administrador</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
   <!-- Sección para eliminar usuarios -->
-  <ion-card> 
-    <ion-card-header>
-      <ion-card-title>Eliminar Usuario</ion-card-title>
+  <ion-card>
+    <ion-card-header color="light">
+      <ion-card-title class="card-title">
+        <ion-icon name="people-circle-outline" slot="start"></ion-icon>
+        Eliminar Usuario
+      </ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <ion-list>
-        <ion-item *ngFor="let user of users; let i = index">
+        <ion-item *ngFor="let user of users; let i = index" class="custom-item">
           <ion-label>
             <h2>{{ user.name }}</h2>
             <p>Email: {{ user.email }}</p>
           </ion-label>
-          <ion-button color="danger" (click)="deleteUser(i)">
+          <ion-button color="danger" shape="round" size="small" (click)="deleteUser(i)">
+            <ion-icon slot="start" name="trash-outline"></ion-icon>
             Eliminar
           </ion-button>
         </ion-item>
@@ -28,43 +31,53 @@
 
   <!-- Sección para agregar eventos -->
   <ion-card>
-    <ion-card-header>
-      <ion-card-title>Agregar Evento</ion-card-title>
+    <ion-card-header color="light">
+      <ion-card-title class="card-title">
+        <ion-icon name="calendar-outline" slot="start"></ion-icon>
+        Agregar Evento
+      </ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <ion-item>
         <ion-label position="stacked">Nombre del Evento</ion-label>
         <ion-input [(ngModel)]="newEvent.name" placeholder="Nombre del evento"></ion-input>
       </ion-item>
-      
+
       <ion-item>
         <ion-label position="stacked">Fecha</ion-label>
         <ion-datetime displayFormat="MMM D, YYYY" [(ngModel)]="newEvent.date"></ion-datetime>
       </ion-item>
-      
+
       <ion-item>
         <ion-label position="stacked">Descripción</ion-label>
         <ion-textarea [(ngModel)]="newEvent.description" placeholder="Descripción del evento"></ion-textarea>
       </ion-item>
-      
-      <ion-button expand="full" (click)="addEvent()">Agregar Evento</ion-button>
-          </ion-card-content>
+
+      <ion-button expand="full" color="success" shape="round" (click)="addEvent()">
+        <ion-icon slot="start" name="add-outline"></ion-icon>
+        Agregar Evento
+      </ion-button>
+    </ion-card-content>
   </ion-card>
 
   <!-- Sección para listar y eliminar eventos -->
   <ion-card>
-    <ion-card-header>
-      <ion-card-title>Eliminar Evento</ion-card-title>
+    <ion-card-header color="light">
+      <ion-card-title class="card-title">
+        <ion-icon name="list-outline" slot="start"></ion-icon>
+        Eliminar Evento
+      </ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <ion-list>
-        <ion-item *ngFor="let event of events; let i = index">
+        <ion-item *ngFor="let event of events; let i = index" class="custom-item">
           <ion-label>
             <h2>{{ event.name }}</h2>
             <p>Fecha: {{ event.date }}</p>
             <p>Descripción: {{ event.description }}</p>
           </ion-label>
-          <ion-button color="danger" (click)="deleteEvent(i)">
+          <ion-button color="danger" shape="round" size="small" (click)="deleteEvent(i)">
+            <ion-icon slot="start" name="trash-outline"></ion-icon>
             Eliminar
           </ion-button>
         </ion-item>
@@ -72,9 +85,9 @@
     </ion-card-content>
   </ion-card>
 
-  <!-- borrar ubicaciones agregado en mapa -->
-
-  
-
-  <ion-button expand="full" [routerLink]="['/home']">Regresar</ion-button>
+  <!-- Botón para regresar -->
+  <ion-button expand="full" color="medium" shape="round" [routerLink]="['/home']">
+    <ion-icon slot="start" name="arrow-back-outline"></ion-icon>
+    Regresar
+  </ion-button>
 </ion-content>

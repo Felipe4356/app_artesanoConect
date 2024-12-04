@@ -1,1 +1,77 @@
-body{background-color: aliceblue;}
+/* General */
+.event-content {
+    --background: #f8f9fa;
+  }
+  
+  .header-title {
+    color: white;
+    font-weight: bold;
+    font-size: 1.5em;
+    text-align: center;
+  }
+  
+  .page-title {
+    text-align: center;
+    font-size: 1.8em;
+    color: #333;
+    margin-top: 10px;
+  }
+  
+  .calendar-icon {
+    color: #4caf50;
+    margin-left: 8px;
+    font-size: 1.2em;
+  }
+  
+  /* Estilo de las tarjetas de eventos */
+  .event-card {
+    margin: 15px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  }
+  
+  .event-title {
+    font-size: 1.4em;
+    color: #1e88e5;
+    margin-bottom: 5px;
+  }
+  
+  .event-description {
+    font-size: 1em;
+    color: #555;
+    line-height: 1.4;
+  }
+  
+  .event-date {
+    font-size: 0.9em;
+    color: #757575;
+    font-style: italic;
+    margin-top: 10px;
+  }
+  
+  /* Estilo del Tab Bar */
+  ion-tab-bar {
+    background-color: #ffffff;
+    border-top: 1px solid #ccc;
+  }
+  
+  ion-tab-button {
+    color: #666;
+  }
+  
+  ion-tab-button.active-tab {
+    color: #1e88e5;
+    font-weight: bold;
+  }
+  
+  ion-tab-button.active-tab ion-icon {
+    color: #1e88e5;
+  }
+  

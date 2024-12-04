@@ -58,7 +58,7 @@ export class MapComponent implements OnInit, OnDestroy {
   }
 
   async showCurrentLocation() {
-    const coordinates = await Geolocation.getCurrentPosition();
+    const coordinates = await Geolocation.getCurrentPosition({ enableHighAccuracy: true });
     const lat = coordinates.coords.latitude;
     const lng = coordinates.coords.longitude;
 
